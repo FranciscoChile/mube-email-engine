@@ -1,0 +1,9 @@
+<html>
+<head></head>
+<body style="background-color: orange">
+    <p>${firstName} ${lastName},</p>
+    <p>${content}</b></p>
+    <p>Correo de prueba!!</p>
+
+</body>
+</html>

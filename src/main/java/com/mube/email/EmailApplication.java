@@ -1,4 +1,4 @@
-package jeferagudeloc.api.email;
+package com.mube.email;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
