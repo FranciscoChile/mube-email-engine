@@ -1,4 +1,4 @@
-package com.mube.email.rest;
+package com.mube.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +14,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
+
+import com.mube.model.EmailBody;
+import com.mube.model.EmailTemplate;
 
 import freemarker.template.Configuration;
 

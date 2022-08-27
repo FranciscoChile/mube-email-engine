@@ -1,4 +1,4 @@
-package jeferagudeloc.api.email;
+package com.mube;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

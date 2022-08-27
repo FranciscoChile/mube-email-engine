@@ -1,4 +1,4 @@
-package com.mube.email.rest;
+package com.mube.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -6,6 +6,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.mube.model.EmailBody;
+import com.mube.model.EmailResponse;
+import com.mube.model.EmailTemplate;
+import com.mube.service.EmailService;
 
 @RestController
 @RequestMapping("/email")
