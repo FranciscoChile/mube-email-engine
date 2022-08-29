@@ -1,7 +1,7 @@
 <html>
 <head></head>
 <body style="background-color: orange">
-    <p>${firstName} ${lastName},</p>
+    <p>${name},</p>
     <p>${content}</b></p>
     <p>Correo de prueba!!</p>
 

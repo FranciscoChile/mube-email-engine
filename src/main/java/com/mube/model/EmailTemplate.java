@@ -14,7 +14,7 @@ import lombok.Setter;
 public class EmailTemplate {
     
     private String emailTo;
-    private String from;
+    private String name;
     private String subject;
     private String content;
     private Map< String, Object > model;

@@ -1,6 +1,7 @@
 package com.mube.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -15,6 +16,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
+import com.mube.model.Customer;
 import com.mube.model.EmailBody;
 import com.mube.model.EmailTemplate;
 
@@ -27,8 +29,13 @@ public class EmailServiceImpl implements EmailService{
 
 	@Autowired 
 	private JavaMailSender sender;
+	
 	@Autowired     
-	Configuration fmConfiguration;
+	private Configuration fmConfiguration;
+
+	@Autowired
+	private CustomerService customerService;
+
 
 	public String sendSimpleMail(EmailBody emailBody)
     {
@@ -63,17 +70,15 @@ public class EmailServiceImpl implements EmailService{
 			MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
 	
 			mimeMessageHelper.setSubject(mail.getSubject());
-			//mimeMessageHelper.setFrom(mail.getFrom());
 			mimeMessageHelper.setTo(mail.getEmailTo());
 
 			Map<String, Object> model = new HashMap<>();
-			model.put("firstName", "Alvaro");
-			model.put("lastName", "Quezada");
+			model.put("name", mail.getName());
 			model.put("content", mail.getContent());
 			mail.setModel(model);
 
-			mail.setContent(geContentFromTemplate(mail.getModel()));
-			mimeMessageHelper.setText(mail.getContent(), true);
+			String body = geContentFromTemplate(mail.getModel());
+			mimeMessageHelper.setText(body, true);
 	
 			sender.send(mimeMessageHelper.getMimeMessage());
 			return "Mail Sent Successfully...";
@@ -95,4 +100,31 @@ public class EmailServiceImpl implements EmailService{
         return content.toString();
     }
 	
+
+
+	public String sendBulkEmail(EmailTemplate commonFields) {
+
+
+		List<Customer> list = customerService.findAll();
+
+		for (Customer c : list) {
+
+			EmailTemplate template = new EmailTemplate();
+
+			template.setContent(commonFields.getContent());
+			template.setSubject(commonFields.getSubject());
+			template.setName(c.getName());
+			template.setEmailTo(c.getEmailTo());
+
+			this.sendEmailTemplate(template);
+
+			LOGGER.info("Email para " + c.getEmailTo() + " enviado");
+		}
+
+
+		return "Envío másivo completado con éxito";
+
+	}
+
+
 }
